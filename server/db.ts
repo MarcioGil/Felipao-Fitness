@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, userProfiles, exercises, workouts, workoutSessions, progressTracking } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -90,3 +90,61 @@ export async function getUserByOpenId(openId: string) {
 }
 
 // TODO: add feature queries here as your schema grows.
+
+// GymAI Pro - Database Query Helpers
+
+export async function getUserProfile(userId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select().from(userProfiles).where(eq(userProfiles.userId, userId)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function upsertUserProfile(userId: number, profile: any) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const existing = await getUserProfile(userId);
+  if (existing) {
+    await db.update(userProfiles).set(profile).where(eq(userProfiles.userId, userId));
+  } else {
+    await db.insert(userProfiles).values({ userId, ...profile });
+  }
+  return getUserProfile(userId);
+}
+
+export async function getExercises(filters?: { muscleGroup?: string; exerciseType?: string }) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  let query: any = db.select().from(exercises);
+  if (filters?.muscleGroup) {
+    query = query.where(eq(exercises.muscleGroup, filters.muscleGroup));
+  }
+  if (filters?.exerciseType) {
+    query = query.where(eq(exercises.exerciseType, filters.exerciseType as any));
+  }
+  return query;
+}
+
+export async function getUserWorkouts(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(workouts).where(eq(workouts.userId, userId));
+}
+
+export async function getWorkoutSessions(userId: number, limit: number = 10) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(workoutSessions).where(eq(workoutSessions.userId, userId)).limit(limit);
+}
+
+export async function getProgressTracking(userId: number, limit: number = 30) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(progressTracking).where(eq(progressTracking.userId, userId)).limit(limit);
+}
