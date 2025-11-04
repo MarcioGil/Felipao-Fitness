@@ -1,421 +1,47 @@
-# Felipao-Fitness 💪
-
-Um **aplicativo de academia inteligente com IA** que gera treinos personalizados baseados em seu biotipo, objetivos e disponibilidade. Desenvolvido com as tecnologias mais modernas e melhores práticas de desenvolvimento.
-
-![Felipao-Fitness](https://img.shields.io/badge/Status-Em%20Desenvolvimento-blue)
-![React](https://img.shields.io/badge/React-19-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![Node.js](https://img.shields.io/badge/Node.js-22-green)
-![License](https://img.shields.io/badge/License-MIT-green)
-
----
-
-## 🎯 Visão Geral
-
-**Felipao-Fitness** é uma plataforma de fitness revolucionária que utiliza inteligência artificial para criar treinos 100% personalizados. Diferente de aplicativos genéricos, o Felipao-Fitness analisa suas características físicas, objetivos e disponibilidade para gerar um plano de treino único e eficaz.
-
-### Principais Diferenciais
-
-- **IA Avançada**: Treinos gerados por inteligência artificial em tempo real
-- **100% Personalizado**: Adaptado ao seu biotipo, objetivos e disponibilidade
-- **Design Moderno**: Interface intuitiva e atraente
-- **Full-Stack Profissional**: Desenvolvido com as melhores práticas de engenharia
-- **Seguro e Privado**: Autenticação OAuth e dados criptografados
-- **Escalável**: Arquitetura preparada para crescimento
-
----
-
-## ✨ Funcionalidades
-
-### 🏠 Página Inicial
-- Landing page atraente com apresentação dos recursos
-- Call-to-action para criar conta
-- Demonstração dos principais benefícios
-
-### 👤 Perfil do Usuário
-- Coleta de dados pessoais (idade, peso, altura)
-- Seleção de biotipo corporal (ectomorfo, mesomorfo, endomorfo)
-- Definição de objetivos (hipertrofia, emagrecimento, resistência, funcional)
-- Nível de experiência (iniciante, intermediário, avançado)
-- Disponibilidade de dias por semana
-- Tipo de exercício preferido
-- Registro de lesões e limitações
-
-### 🤖 Gerador de Treinos com IA
-- Geração inteligente de treinos personalizados
-- Estrutura completa com exercícios, séries, repetições e descanso
-- Notas técnicas para cada exercício
-- Adaptação automática ao nível de experiência
-- Múltiplas variações de treino
-
-### 📊 Acompanhamento de Progresso
-- Registro de sessões de treino
-- Rastreamento de peso e medidas
-- Gráficos e estatísticas de desempenho
-- Histórico completo de treinos
-
-### 📚 Biblioteca de Exercícios
-- Mais de 500 exercícios catalogados
-- Descrição técnica de cada exercício
-- Ícones e ilustrações
-- Grupos musculares alvo
-- Variações de exercícios
-
----
-
-## 🛠️ Stack Tecnológico
-
-### Frontend
-- **React 19** - Framework UI moderno
-- **TypeScript** - Type safety e melhor DX
-- **Tailwind CSS 4** - Styling rápido e consistente
-- **shadcn/ui** - Componentes reutilizáveis
-- **Lucide React** - Ícones de alta qualidade
-- **wouter** - Roteamento leve
-- **tRPC** - Type-safe RPC client
-
-### Backend
-- **Node.js 22** - Runtime JavaScript
-- **Express 4** - Framework web minimalista
-- **tRPC 11** - Type-safe API
-- **Drizzle ORM** - Type-safe database queries
-
-### Banco de Dados
-- **MySQL/TiDB** - Banco de dados relacional
-- **Drizzle Kit** - Migrations e schema management
-
-### IA & APIs
-- **OpenAI API** - Geração de treinos com IA
-- **Manus OAuth** - Autenticação segura
-- **Manus Built-in APIs** - Notificações e storage
-
-### DevOps & Deployment
-- **Vite** - Build tool rápido
-- **pnpm** - Package manager eficiente
-- **Docker** - Containerização (opcional)
-
----
-
-## 🚀 Como Começar
-
-### Pré-requisitos
-- Node.js 22+
-- pnpm 9+
-- Conta Manus (para OAuth e APIs)
-
-### Instalação
-
-1. **Clone o repositório**
-```bash
-git clone https://github.com/MarcioGil/Felipao-Fitness.git
-cd Felipao-Fitness
-```
-
-2. **Instale as dependências**
-```bash
-pnpm install
-```
-
-3. **Configure as variáveis de ambiente**
-```bash
-# Copie o arquivo de exemplo
-cp .env.example .env
-
-# Edite com suas credenciais
-nano .env
-```
-
-Variáveis necessárias:
-```env
-DATABASE_URL=mysql://user:password@localhost:3306/felipao_fitness
-JWT_SECRET=seu_secret_aqui
-VITE_APP_ID=seu_app_id
-OAUTH_SERVER_URL=https://api.manus.im
-VITE_OAUTH_PORTAL_URL=https://portal.manus.im
-```
-
-4. **Execute as migrações do banco de dados**
-```bash
-pnpm db:push
-```
-
-5. **Inicie o servidor de desenvolvimento**
-```bash
-pnpm dev
-```
-
-O aplicativo estará disponível em `http://localhost:3000`
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-felipao-fitness/
-├── client/                    # Frontend React
-│   ├── src/
-│   │   ├── pages/            # Páginas principais
-│   │   │   ├── Home.tsx      # Landing page
-│   │   │   ├── Profile.tsx   # Perfil do usuário
-│   │   │   └── WorkoutGenerator.tsx  # Gerador de treinos
-│   │   ├── components/       # Componentes reutilizáveis
-│   │   ├── lib/              # Utilitários e helpers
-│   │   ├── App.tsx           # Componente raiz
-│   │   └── index.css         # Estilos globais
-│   └── public/               # Assets estáticos
-│
-├── server/                    # Backend Express
-│   ├── routers.ts            # Procedimentos tRPC
-│   ├── db.ts                 # Query helpers
-│   └── _core/                # Configuração interna
-│
-├── drizzle/                   # Schema e migrations
-│   ├── schema.ts             # Definição das tabelas
-│   └── migrations/           # Histórico de migrações
-│
-├── shared/                    # Código compartilhado
-│   └── const.ts              # Constantes
-│
-├── package.json              # Dependências
-├── tsconfig.json             # Configuração TypeScript
-├── vite.config.ts            # Configuração Vite
-└── drizzle.config.ts         # Configuração Drizzle
-```
-
----
-
-## 🗄️ Schema do Banco de Dados
-
-### Tabelas Principais
-
-#### `users`
-Usuários autenticados do sistema
-```sql
-- id (PK)
-- openId (UNIQUE) - ID do OAuth
-- name
-- email
-- role (admin | user)
-- createdAt, updatedAt, lastSignedIn
-```
-
-#### `user_profiles`
-Perfil personalizado de cada usuário
-```sql
-- id (PK)
-- userId (FK, UNIQUE)
-- age, weight, height
-- biotype (ectomorfo | mesomorfo | endomorfo)
-- experience (iniciante | intermediario | avancado)
-- objective (hipertrofia | emagrecimento | resistencia | funcional)
-- daysPerWeek
-- preferredExerciseType
-- injuries (JSON)
-```
-
-#### `exercises`
-Biblioteca de exercícios
-```sql
-- id (PK)
-- name
-- description
-- muscleGroup
-- exerciseType
-- difficulty
-- instructions
-- icon, videoUrl
-```
-
-#### `workouts`
-Treinos gerados
-```sql
-- id (PK)
-- userId (FK)
-- name, description
-- workoutType (full_body | abc | abcde | push_pull_legs)
-- durationMinutes
-- difficulty
-- generatedByAI
-- content (JSON com estrutura do treino)
-```
-
-#### `workout_sessions`
-Sessões de treino realizadas
-```sql
-- id (PK)
-- userId (FK)
-- workoutId (FK)
-- date
-- durationMinutes
-- exercisesCompleted, totalExercises
-- notes
-```
-
-#### `progress_tracking`
-Rastreamento de progresso
-```sql
-- id (PK)
-- userId (FK)
-- date
-- weight, bodyFat
-- measurements (JSON)
-- notes
-```
-
----
-
-## 🔌 API Endpoints (tRPC)
-
-### Autenticação
-```typescript
-auth.me.useQuery()           // Obter usuário atual
-auth.logout.useMutation()    // Fazer logout
-```
-
-### Perfil
-```typescript
-profile.get.useQuery()       // Obter perfil do usuário
-profile.update.useMutation() // Atualizar perfil
-```
-
-### Exercícios
-```typescript
-exercises.list.useQuery({
-  muscleGroup?: string
-  exerciseType?: string
-})
-```
-
-### Treinos
-```typescript
-workouts.list.useQuery()     // Listar treinos do usuário
-workouts.generate.useMutation({
-  biotype,
-  daysPerWeek,
-  exerciseType,
-  objective,
-  experience
-})
-```
-
----
-
-## 🎨 Design System
-
-### Paleta de Cores
-- **Primária**: Indigo (#6366F1) - Confiança e energia
-- **Secundária**: Emerald (#10B981) - Saúde e crescimento
-- **Destaque**: Amber (#F59E0B) - Motivação e ação
-- **Fundo**: Branco (#FFFFFF) - Clareza
-- **Texto**: Cinza Escuro (#1F2937) - Legibilidade
-
-### Tipografia
-- **Headings**: Poppins (700) - Impacto visual
-- **Body**: Inter (400-600) - Legibilidade
-
-### Componentes
-Todos os componentes utilizam shadcn/ui com customizações do design system.
-
----
-
-## 🔐 Segurança
-
-- **Autenticação OAuth** via Manus
-- **JWT Sessions** com cookies seguros
-- **Type Safety** com TypeScript
-- **Validação de Input** com Zod
-- **CORS** configurado corretamente
-- **Rate Limiting** (recomendado em produção)
-
----
-
-## 📊 Monitoramento e Analytics
-
-O projeto está configurado para:
-- Rastreamento de eventos de usuário
-- Análise de uso do aplicativo
-- Monitoramento de performance
-- Logs de erro centralizados
-
----
-
-## 🚢 Deployment
-
-### Deploy na Plataforma Manus
-```bash
-# Criar checkpoint
-pnpm build
-
-# Publicar via UI Management
-# Acesse o painel de controle e clique em "Publish"
-```
-
-### Deploy em Produção
-```bash
-# Build
-pnpm build
-
-# Iniciar servidor
-node dist/index.js
-```
-
-Variáveis de ambiente necessárias em produção:
-```env
-NODE_ENV=production
-DATABASE_URL=mysql://...
-JWT_SECRET=seu_secret_seguro
-VITE_APP_ID=seu_app_id
-```
-
----
-
-## 📝 Documentação Adicional
-
-- [Guia de Desenvolvimento](./docs/DEVELOPMENT.md)
-- [Arquitetura do Projeto](./docs/ARCHITECTURE.md)
-- [Contribuindo](./CONTRIBUTING.md)
-
----
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Por favor:
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
----
-
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
-## 👨‍💻 Desenvolvedor
-
-**Márcio Gil**
-- GitHub: [@MarcioGil](https://github.com/MarcioGil)
-- Email: seu_email@example.com
-
----
-
-## 🙏 Agradecimentos
-
-- Manus AI - Plataforma de desenvolvimento
-- OpenAI - API de IA para geração de treinos
-- React & TypeScript communities
-- shadcn/ui - Componentes reutilizáveis
-
----
-
-## 📞 Suporte
-
-Para suporte, abra uma issue no GitHub ou entre em contato através do email.
-
----
-
-**Desenvolvido com ❤️ para transformar vidas através do fitness**
+🌟 Academia da Vida Real (e Fictícia, Mas o Suor é Verdadeiro!) 🌟
+
+E aí, futuro(a) campeão(ã) e rainha/rei dos pesos!
+
+Bem-vindo(a) à nossa super academia, onde a única coisa que levamos a sério demais é a sua alegria em treinar! Esquece aquele monte de termo técnico chato do seu outro readme – aqui, o papo é reto, engraçado e focado em te fazer se sentir incrível (e, quem sabe, te deixar com um tanquinho para o verão 😉).
+
+🧬 Conhecendo Seu Biotipo: Você Não é um Cookie Cortado!
+Pare de se comparar com o vizinho maromba! Seu corpo tem um jeito único de funcionar, e a gente chama isso de biotipo. Conhecer o seu é tipo descobrir o "manual de instruções" do seu corpo, só que sem aquela letrinha miúda.
+
+Seu Biotipo (O Jeito Que Você Veio ao Mundo)	Suas Características (Brincadeiras à Parte!)	Nosso Treino Ideal (O Segredo dos Deuses!)
+Ectomorfo	O famoso "come de tudo e não engorda". Parece uma bênção, mas ganhar massa muscular é seu Everest pessoal. O metabolismo é mais rápido que a sua conexão de internet.	Foco Força e Fúria (mas controlada)! Pegar peso pesado e fazer poucas repetições (tipo 6-8, a repetição da qualidade). O cardio? Trate como aquele parente distante: veja de vez em quando (poucas vezes na semana) e evite longas conversas (corridas de 1 hora). Priorize o descanso!
+Mesomorfo	O sortudo! Ganha músculo fácil e perde gordura também. Se olhar para um alteres, já cresce. Seu desafio é não ficar "preso" na zona de conforto e sempre buscar novos desafios.	Acelerado e Versátil! Combine treinos de força (com peso moderado a alto) com aeróbicos (para manter a definição). Pode variar no número de repetições (média de 8-12). Seu corpo ama ser desafiado – CrossFit, HIIT, Natação... manda ver!
+Endomorfo	Facilidade em ganhar peso (músculo e gordura). O metabolismo é mais "relax" (leia-se: lento) e adora guardar uma gordurinha extra. Seu desafio é o controle da alimentação e a queima calórica.	Queima Total! Aeróbico é seu melhor amigo, faça-o com mais frequência (HIIT é ótimo para acelerar o metabolismo!). Combine com treinos de força (pesos moderados com mais repetições, tipo 12-15) para manter a massa magra. Foco na consistência, sem preguiça!
+
+Export to Sheets
+
+🍎 Saúde, Malhação e a Vida: O Triângulo Amoroso Perfeito
+Não é só sobre ter um corpo sarado, é sobre ter um corpo feliz!
+
+Saúde em Primeiro Lugar: Se a saúde não vai bem, o treino desanda. Durma como um bebê (ou pelo menos tente), beba água como um camelo no deserto e não pule o café da manhã (ou a refeição que for importante para a sua dieta).
+
+Seus Exercícios, Suas Regras (Com Acompanhamento!): O treino é a sua terapia. Não gosta de esteira? Dance! Não suporta levantar peso? Faça exercícios com o peso do corpo ou yoga. O importante é se movimentar.
+
+A Jornada é Sua: O que funciona para o Márcio Gil, pode não funcionar para você. A gente te dá as ferramentas e a inspiração (e uns memes, claro!), mas o mérito do sucesso é TODO SEU.
+
+👨‍💻 O Mestre de Cerimônias (Meus Agradecimentos Pessoais!)
+Sou Márcio Alexandre de Paiva Gil, Embaixador da Turma 14 da DIO Campus Expert, e o cara por trás dessa maluquice. Sou apaixonado por fazer a vida das pessoas melhor – seja com tecnologia, educação ou agora, fitness (mesmo que seja fictício!). Acredito que o conhecimento e a tecnologia são os "suplementos" que transformam a vida de verdade.
+
+Desenvolvido com ❤️ para transformar vidas através do fitness.
+
+🙏 Obrigado de Coração!
+Um salve especial para:
+
+Manus AI & OpenAI: Pelos cérebros robóticos que ajudaram a pensar essa estrutura.
+
+Comunidades React & TypeScript: Pela base sólida (como um bom agachamento) do nosso projeto.
+
+shadcn/ui: Por dar aquele "look & feel" de academia premium.
+
+🌐 Quer me Dar um Olá (ou um Pull Request)?
+💼 LinkedIn: https://linkedin.com/in/marcio-gil-1b7669309
+
+🌍 Portfólio: https://marciogil.github.io/curriculum-vitae/
+
+🧠 GitHub: https://github.com/MarcioGil
+
+E agora, qual biotipo você acha que o Márcio Gil se encaixa olhando para a apresentação dele: Ectomorfo, Mesomorfo ou Endomorfo?
